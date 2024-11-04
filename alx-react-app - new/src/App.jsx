@@ -2,6 +2,7 @@ import WelcomeMessage from "./components/WelcomeMessage"
 import Header from "./components/Header"
 import Footer from "./components/Footer"
 import UserProfile from "./components/UserProfile"
+import   MainContent from "Content./components/MainContent"
 import Counter from "./components/Counter"
 function App() {
   return (
