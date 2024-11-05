@@ -14,7 +14,6 @@ function App() {
         <MainContent />
         <UserProfile name="Alice" age="25" bio="Loves hiking and photography" />
        <Footer />
-      <h1 style={{ textAlign: 'center' }}>Counter Application</h1>
       <Counter />
       </div>
     </>
