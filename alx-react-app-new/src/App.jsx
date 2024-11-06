@@ -3,7 +3,8 @@ import Header from './components/Header';
 import MainContent from './components/MainContent';
 import Footer from './components/Footer';
 import UserProfile from './components/UserProfile';
-import { useState } from 'react'
+import Counter from './components/Counter'
+
 import './App.css'
 
 function Counter() {
@@ -17,12 +18,7 @@ function Counter() {
       <Header />
       <MainContent />
       <UserProfile name="Alice" age="25" bio="Loves hiking and photography" />
-
-      <p>Current Count: {count}</p>
-      <button onClick={() => setCount(count + 1)}>Increment</button>
-      <button onClick={() => setCount(count - 1)}>Decrement</button>
-      <button onClick={() => setCount(0)}>Reset</button>
-      
+        <Counter />
       <Footer />
     </div>
     </>
