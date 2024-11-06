@@ -10,8 +10,8 @@ function Counter()
   return (
     <>
       <div>
-      <WelcomeMessage />
       <Header />
+      <WelcomeMessage />
       <MainContent />
       <UserProfile name="Alice" age="25" bio="Loves hiking and photography" />
         
