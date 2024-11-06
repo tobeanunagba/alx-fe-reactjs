@@ -1,9 +1,9 @@
-import WelcomeMessage from "./Components/WelcomeMessage";
-import Header from "./Components/Header";
-import MainContent from "./Components/MainContent";
-import UserProfile from "./Components/UserProfile";
-import Footer from "./Components/Footer";
-import { useState} from "react";
+import WelcomeMessage from './Components/WelcomeMessage';
+import Header from './Components/Header';
+import MainContent from './Components/MainContent';
+import UserProfile from './Components/UserProfile';
+import Footer from './Components/Footer';
+import {useState} from 'react';
 
 function Counter(){
   const [count, setCount] = useState(0)
