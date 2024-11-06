@@ -14,7 +14,6 @@ function App() {
       <MainContent />
       <UserProfile name="Alice" age="25" bio="Loves hiking and photography" />
       <Footer />
-      
       <Counter />
       </div>
     </>
