@@ -30,7 +30,7 @@ const RegistrationForm = () => {
 
         // Basic validation
         if (!username || !email || !password) {
-            setError('All fields are required!');
+            setErrors('All fields are required!');
             return;
         }
 
