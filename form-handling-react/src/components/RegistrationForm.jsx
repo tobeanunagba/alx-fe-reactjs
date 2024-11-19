@@ -51,7 +51,7 @@ const RegistrationForm = () => {
                 <input
                     type="text"
                     name="username"
-                    value={formData.username}
+                    value={formData.username} // Controlled component
                     onChange={handleChange}
                     placeholder="Username"
                 />
@@ -60,7 +60,7 @@ const RegistrationForm = () => {
                 <input
                     type="email"
                     name="email"
-                    value={formData.email}
+                    value={formData.email} // Controlled component
                     onChange={handleChange}
                     placeholder="Email"
                 />
@@ -69,7 +69,7 @@ const RegistrationForm = () => {
                 <input
                     type="password"
                     name="password"
-                    value={formData.password}
+                    value={formData.password} // Controlled component
                     onChange={handleChange}
                     placeholder="Password"
                 />
@@ -78,6 +78,10 @@ const RegistrationForm = () => {
             <button type="submit">Register</button>
         </form>
     );
+};
+
+export default RegistrationForm;
+
 };
 
 export default RegistrationForm;
