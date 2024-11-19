@@ -29,7 +29,6 @@ const RegistrationForm = () => {
         if (!username || !email || !password) {
             setError('All fields are required!');
             return;
-           
         }
 
         setError(''); // Clear any previous errors
@@ -49,10 +48,30 @@ const RegistrationForm = () => {
     return (
         <form onSubmit={handleSubmit}>
             <div>
-            <input type="text" name="username" value={username} onChange={handleChange} />
-             <input type="email" name="email" value={email} onChange={handleChange} />
-             <input type="password" name="password" value={password} onChange={handleChange} />
-
+                <input
+                    type="text"
+                    name="username"
+                    value={formData.username}
+                    onChange={handleChange}
+                    placeholder="Username"
+                />
+            </div>
+            <div>
+                <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="Email"
+                />
+            </div>
+            <div>
+                <input
+                    type="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    placeholder="Password"
                 />
             </div>
             {error && <p style={{ color: 'red' }}>{error}</p>}
@@ -62,4 +81,5 @@ const RegistrationForm = () => {
 };
 
 export default RegistrationForm;
+
 
