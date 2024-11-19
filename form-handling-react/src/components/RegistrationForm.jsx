@@ -45,7 +45,7 @@ const RegistrationForm = () => {
                 <input
                     type="text"
                     name="username"
-                    value={formData.username} // Controlled input
+                    value={formData.username} // Correctly mapped value
                     onChange={handleChange}
                 />
             </div>
@@ -54,7 +54,7 @@ const RegistrationForm = () => {
                 <input
                     type="email"
                     name="email"
-                    value={formData.email} // Controlled input
+                    value={formData.email} // Correctly mapped value
                     onChange={handleChange}
                 />
             </div>
@@ -63,7 +63,7 @@ const RegistrationForm = () => {
                 <input
                     type="password"
                     name="password"
-                    value={formData.password} // Controlled input
+                    value={formData.password} // Correctly mapped value
                     onChange={handleChange}
                 />
             </div>
