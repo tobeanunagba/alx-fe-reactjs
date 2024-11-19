@@ -48,31 +48,10 @@ const RegistrationForm = () => {
     return (
         <form onSubmit={handleSubmit}>
             <div>
-                <input
-                    type="text"
-                    name="username"
-                    value={formData.username} // Controlled component
-                    onChange={handleChange}
-                    placeholder="Username"
-                />
-            </div>
-            <div>
-                <input
-                    type="email"
-                    name="email"
-                    value={formData.email} // Controlled component
-                    onChange={handleChange}
-                    placeholder="Email"
-                />
-            </div>
-            <div>
-                <input
-                    type="password"
-                    name="password"
-                    value={formData.password} // Controlled component
-                    onChange={handleChange}
-                    placeholder="Password"
-                />
+              <input type="text" name="username" value={username} onChange={handleChange} />
+<input type="email" name="email" value={email} onChange={handleChange} />
+<input type="password" name="password" value={password} onChange={handleChange} />
+              
             </div>
             {error && <p style={{ color: 'red' }}>{error}</p>}
             <button type="submit">Register</button>
