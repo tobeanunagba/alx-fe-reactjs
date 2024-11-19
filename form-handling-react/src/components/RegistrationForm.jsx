@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 const RegistrationForm = () => {
+    // State for controlled inputs
     const [formData, setFormData] = useState({
         username: '',
         email: '',
@@ -16,6 +17,7 @@ const RegistrationForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
         const { username, email, password } = formData;
 
         if (!username || !email || !password) {
@@ -26,7 +28,13 @@ const RegistrationForm = () => {
         setError('');
         console.log('Form submitted:', formData);
 
-        // Mock API submission
+        // Reset form after submission
+        setFormData({
+            username: '',
+            email: '',
+            password: ''
+        });
+
         alert('User registered successfully!');
     };
 
@@ -37,7 +45,7 @@ const RegistrationForm = () => {
                 <input
                     type="text"
                     name="username"
-                    value={formData.username}
+                    value={formData.username} // Controlled input
                     onChange={handleChange}
                 />
             </div>
@@ -46,7 +54,7 @@ const RegistrationForm = () => {
                 <input
                     type="email"
                     name="email"
-                    value={formData.email}
+                    value={formData.email} // Controlled input
                     onChange={handleChange}
                 />
             </div>
@@ -55,7 +63,7 @@ const RegistrationForm = () => {
                 <input
                     type="password"
                     name="password"
-                    value={formData.password}
+                    value={formData.password} // Controlled input
                     onChange={handleChange}
                 />
             </div>
@@ -66,3 +74,4 @@ const RegistrationForm = () => {
 };
 
 export default RegistrationForm;
+
