@@ -28,14 +28,10 @@ const RegistrationForm = () => {
 
         const { username, email, password } = formData;
 
-        // Basic validation
         if (!username || !email || !password) {
-            setErrors('All fields are required!');
-            return;
-        }
-
-        setError(''); // Clear any previous errors
-
+    setError('All fields are required!');
+    return;
+}
         console.log('Form submitted:', formData);
 
         // Reset form after submission
