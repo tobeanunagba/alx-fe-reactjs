@@ -10,6 +10,34 @@ const RegistrationForm = () => {
 
     const [error, setError] = useState('');
 
+    const validate = () => {
+    let valid = true;
+    const newErrors = { username: '', email: '', password: '' };
+
+    if (!formData.username) {
+        newErrors.username = 'Username is required';
+        valid = false;
+    }
+    if (!formData.email) {
+        newErrors.email = 'Email is required';
+        valid = false;
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+        newErrors.email = 'Email is invalid';
+        valid = false;
+    }
+    if (!formData.password) {
+        newErrors.password = 'Password is required';
+        valid = false;
+    } else if (formData.password.length < 6) {
+        newErrors.password = 'Password must be at least 6 characters long';
+        valid = false;
+    }
+
+    setErrors(newErrors);
+    return valid;
+};
+
+
     // Handle input changes
     const handleChange = (e) => {
         const { name, value } = e.target; // Get name and value from the event
