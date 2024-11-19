@@ -9,8 +9,12 @@ const RegistrationForm = () => {
     });
 
     const [error, setError] = useState('');
-
- 
+    if (!username) { setError('Username is required!'); return; } 
+    if (!email) { setError('Email is required!'); return; } 
+    if (!password) { setError('Password is required!'); return; } 
+    // Clear error if all fields are filled 
+    setError(''); 
+    console.log('Form submitted:', formData);
 
 
     // Handle input changes
