@@ -5,14 +5,14 @@ const Search = () => {
   const [username, setUsername] = useState('');
   const [location, setLocation] = useState('');
   const [minRepos, setMinRepos] = useState('');
-  const [userData, setUserData] = useState([]);
+  const [userData, setUser Data] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
   const [perPage] = useState(10); // Number of results per page
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target; // Destructure name and value from the event target
     if (name === 'username') setUsername(value);
     if (name === 'location') setLocation(value);
     if (name === 'minRepos') setMinRepos(value);
@@ -22,12 +22,12 @@ const Search = () => {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    setUserData([]);
+    setUser Data([]);
     setPage(1); // Reset to the first page
 
     try {
       const data = await fetchAdvancedGitHubUsers(username, location, minRepos, page, perPage);
-      setUserData(data.items || []);
+      setUser Data(data.items || []);
     } catch (err) {
       setError('Looks like we can\'t find any users');
     } finally {
@@ -42,7 +42,7 @@ const Search = () => {
 
     try {
       const data = await fetchAdvancedGitHubUsers(username, location, minRepos, page + 1, perPage);
-      setUserData(prevData => [...prevData, ...(data.items || [])]);
+      setUser Data(prevData => [...prevData, ...(data.items || [])]);
     } catch (err) {
       setError('Looks like we can\'t find any more users');
     } finally {
