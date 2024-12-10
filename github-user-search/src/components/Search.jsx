@@ -5,31 +5,31 @@ const Search = () => {
   const [username, setUsername] = useState('');
   const [location, setLocation] = useState('');
   const [minRepos, setMinRepos] = useState('');
-  const [userData, setUser Data] = useState([]);
+  const [userData, setUserData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
-  const [perPage] = useState(10); // Number of results per page
+  const [perPage] = useState(10);
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target; // Destructure name and value from the event target
-    if (name === 'username') setUsername(value);
-    if (name === 'location') setLocation(value);
-    if (name === 'minRepos') setMinRepos(value);
+    const { name, value } = e.target;
+    if (name === 'username') setUsername(e.target.value); // Using e.target.value explicitly
+    if (name === 'location') setLocation(e.target.value); // Using e.target.value explicitly
+    if (name === 'minRepos') setMinRepos(e.target.value); // Using e.target.value explicitly
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    setUser Data([]);
-    setPage(1); // Reset to the first page
+    setUserData([]);
+    setPage(1);
 
     try {
       const data = await fetchAdvancedGitHubUsers(username, location, minRepos, page, perPage);
-      setUser Data(data.items || []);
+      setUserData(data.items || []);
     } catch (err) {
-      setError('Looks like we can\'t find any users');
+      setError("Looks like we can't find any users");
     } finally {
       setLoading(false);
     }
@@ -38,13 +38,13 @@ const Search = () => {
   const loadMore = async () => {
     setLoading(true);
     setError(null);
-    setPage(prevPage => prevPage + 1);
+    setPage((prevPage) => prevPage + 1);
 
     try {
       const data = await fetchAdvancedGitHubUsers(username, location, minRepos, page + 1, perPage);
-      setUser Data(prevData => [...prevData, ...(data.items || [])]);
+      setUserData((prevData) => [...prevData, ...(data.items || [])]);
     } catch (err) {
-      setError('Looks like we can\'t find any more users');
+      setError("Looks like we can't find any more users");
     } finally {
       setLoading(false);
     }
@@ -86,7 +86,7 @@ const Search = () => {
       {error && <p className="text-red-500">{error}</p>}
       {userData.length > 0 && (
         <div className="mt-4">
-          {userData.map(user => (
+          {userData.map((user) => (
             <div key={user.id} className="border p-4 mb-2 rounded">
               <h2 className="text-lg font-bold">{user.login}</h2>
               <p>Location: {user.location || 'N/A'}</p>
@@ -106,3 +106,4 @@ const Search = () => {
 };
 
 export default Search;
+
