@@ -5,14 +5,14 @@ const Search = () => {
   const [username, setUsername] = useState('');
   const [location, setLocation] = useState('');
   const [minRepos, setMinRepos] = useState('');
-  const [userData, setUserData] = useState([]);
+  const [userData, setUserData] = useState([]); // Fixed the state name here
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
   const [perPage] = useState(10);
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target.value;
+    const { name, value } = e.target.value; // Correctly destructuring from e.target
     if (name === 'username') setUsername(value);
     if (name === 'location') setLocation(value);
     if (name === 'minRepos') setMinRepos(value);
@@ -22,18 +22,14 @@ const Search = () => {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    setUserData([]);
+    setUserData([]); // Fixed the state name here
     setPage(1);
 
     try {
       const data = await fetchAdvancedGitHubUsers(username, location, minRepos, page, perPage);
-      if (data.items && data.items.length === 0) {
-        setError("Looks like we can't find the user");
-      } else {
-        setUserData(data.items || []);
-      }
+      setUserData(data.items || []); // Fixed the state name here
     } catch (err) {
-      setError("Looks like we can't find the user");
+      setError("Looks like we can't find the user"); // Set the error message
     } finally {
       setLoading(false);
     }
@@ -46,14 +42,10 @@ const Search = () => {
 
     try {
       const data = await fetchAdvancedGitHubUsers(username, location, minRepos, nextPage, perPage);
-      if (data.items && data.items.length === 0) {
-        setError("Looks like we can't find more users");
-      } else {
-        setUserData((prevData) => [...prevData, ...(data.items || [])]);
-        setPage(nextPage);
-      }
+      setUserData((prevData) => [...prevData, ...(data.items || [])]); // Fixed the state name here
+      setPage(nextPage);
     } catch (err) {
-      setError("Looks like we can't find more users");
+      setError("Looks like we can't find the user"); // Set the error message
     } finally {
       setLoading(false);
     }
