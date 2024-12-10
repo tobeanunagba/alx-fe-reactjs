@@ -22,11 +22,11 @@ const Search = () => {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    setUserData([]); // Reset previous results
-    setPage(1); // Reset to the first page
+    setUserData([]);
+    setPage(1);
 
     try {
-      const data = await fetchAdvancedGitHubUsers(username, location, minRepos);
+      const data = await fetchAdvancedGitHubUsers(username, location, minRepos, page, perPage);
       setUserData(data.items || []);
     } catch (err) {
       setError("Looks like we can't find the user");
@@ -36,16 +36,16 @@ const Search = () => {
   };
 
   const loadMore = async () => {
-    const nextPage = page + 1; // Calculate the next page before setting state
     setLoading(true);
     setError(null);
+    const nextPage = page + 1;
 
     try {
       const data = await fetchAdvancedGitHubUsers(username, location, minRepos, nextPage, perPage);
       setUserData((prevData) => [...prevData, ...(data.items || [])]);
-      setPage(nextPage); // Update the page state after successful fetch
+      setPage(nextPage);
     } catch (err) {
-      setError("Unable to fetch more users. Please try again.");
+      setError("Looks like we can't find the user");
     } finally {
       setLoading(false);
     }
