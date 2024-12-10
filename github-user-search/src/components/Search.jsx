@@ -12,10 +12,10 @@ const Search = () => {
   const [perPage] = useState(10);
 
   const handleInputChange = (e) => {
-    const value = e.target.value;
-    if (e.target.name === 'username') setUsername(value);
-    if (e.target.name === 'location') setLocation(value);
-    if (e.target.name === 'minRepos') setMinRepos(value);
+    const { name, value } = e.target.value;
+    if (name === 'username') setUsername(value);
+    if (name === 'location') setLocation(value);
+    if (name === 'minRepos') setMinRepos(value);
   };
 
   const handleSubmit = async (e) => {
@@ -27,7 +27,11 @@ const Search = () => {
 
     try {
       const data = await fetchAdvancedGitHubUsers(username, location, minRepos, page, perPage);
-      setUserData(data.items || []);
+      if (data.items && data.items.length === 0) {
+        setError("Looks like we can't find the user");
+      } else {
+        setUserData(data.items || []);
+      }
     } catch (err) {
       setError("Looks like we can't find the user");
     } finally {
@@ -42,10 +46,14 @@ const Search = () => {
 
     try {
       const data = await fetchAdvancedGitHubUsers(username, location, minRepos, nextPage, perPage);
-      setUserData((prevData) => [...prevData, ...(data.items || [])]);
-      setPage(nextPage);
+      if (data.items && data.items.length === 0) {
+        setError("Looks like we can't find more users");
+      } else {
+        setUserData((prevData) => [...prevData, ...(data.items || [])]);
+        setPage(nextPage);
+      }
     } catch (err) {
-      setError("Looks like we can't find the user");
+      setError("Looks like we can't find more users");
     } finally {
       setLoading(false);
     }
@@ -106,4 +114,3 @@ const Search = () => {
 };
 
 export default Search;
-
