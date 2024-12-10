@@ -1,10 +1,22 @@
 import axios from 'axios';
 
 // Function to fetch a single GitHub user by username
-const fetchGitHubUser  = async (username) => {
+const fetchGitHubUser = async (username) => {
   try {
     const response = await axios.get(`https://api.github.com/users/${username}`);
     return response.data;
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    throw error; // Propagate the error to the calling function
+  }
+};
+
+// Function to fetch user data based on advanced search criteria
+const fetchUserData = async (username, location, minRepos) => {
+  try {
+    const user = await fetchGitHubUser(username);
+    // You can add additional logic here if needed
+    return user;
   } catch (error) {
     console.error("Error fetching user data:", error);
     throw error; // Propagate the error to the calling function
@@ -28,4 +40,4 @@ const fetchAdvancedGitHubUsers = async (username, location, minRepos) => {
   }
 };
 
-export { fetchGitHubUser , fetchAdvancedGitHubUsers };
+export { fetchGitHubUser, fetchUserData, fetchAdvancedGitHubUsers };
