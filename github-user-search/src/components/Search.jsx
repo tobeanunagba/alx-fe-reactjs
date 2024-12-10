@@ -12,7 +12,7 @@ const Search = () => {
   const [perPage] = useState(10);
 
   const handleInputChange = (e) => {
-    const value = e.target.value; // Directly accessing e.target.value
+    const value = e.target.value;
     if (e.target.name === 'username') setUsername(value);
     if (e.target.name === 'location') setLocation(value);
     if (e.target.name === 'minRepos') setMinRepos(value);
@@ -84,7 +84,7 @@ const Search = () => {
       </form>
 
       {loading && <p>Loading...</p>}
-      {error && <p className="text-red-500">{error}</p>}
+      {error && <p className="text-red-500">{error}</p>} {/* Display the error message */}
       {userData.length > 0 && (
         <div className="mt-4">
           {userData.map((user) => (
@@ -106,3 +106,4 @@ const Search = () => {
 };
 
 export default Search;
+
