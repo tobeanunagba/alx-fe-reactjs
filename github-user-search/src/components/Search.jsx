@@ -13,38 +13,39 @@ const Search = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    if (name === 'username') setUsername(e.target.value); // Using e.target.value explicitly
-    if (name === 'location') setLocation(e.target.value); // Using e.target.value explicitly
-    if (name === 'minRepos') setMinRepos(e.target.value); // Using e.target.value explicitly
+    if (name === 'username') setUsername(value);
+    if (name === 'location') setLocation(value);
+    if (name === 'minRepos') setMinRepos(value);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    setUserData([]);
-    setPage(1);
+    setUserData([]); // Reset previous results
+    setPage(1); // Reset to the first page
 
     try {
-      const data = await fetchAdvancedGitHubUsers(username, location, minRepos, page, perPage);
+      const data = await fetchAdvancedGitHubUsers(username, location, minRepos);
       setUserData(data.items || []);
     } catch (err) {
-      setError("Looks like we can't find any users");
+      setError("Looks like we can't find the user");
     } finally {
       setLoading(false);
     }
   };
 
   const loadMore = async () => {
+    const nextPage = page + 1; // Calculate the next page before setting state
     setLoading(true);
     setError(null);
-    setPage((prevPage) => prevPage + 1);
 
     try {
-      const data = await fetchAdvancedGitHubUsers(username, location, minRepos, page + 1, perPage);
+      const data = await fetchAdvancedGitHubUsers(username, location, minRepos, nextPage, perPage);
       setUserData((prevData) => [...prevData, ...(data.items || [])]);
+      setPage(nextPage); // Update the page state after successful fetch
     } catch (err) {
-      setError("Looks like we can't find any more users");
+      setError("Unable to fetch more users. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -88,9 +89,8 @@ const Search = () => {
         <div className="mt-4">
           {userData.map((user) => (
             <div key={user.id} className="border p-4 mb-2 rounded">
+              <img src={user.avatar_url} alt={`${user.login}'s avatar`} className="w-16 h-16 rounded-full mb-2" />
               <h2 className="text-lg font-bold">{user.login}</h2>
-              <p>Location: {user.location || 'N/A'}</p>
-              <p>Repositories: {user.public_repos}</p>
               <a href={user.html_url} target="_blank" rel="noopener noreferrer" className="text-blue-500">
                 View Profile
               </a>
@@ -106,4 +106,3 @@ const Search = () => {
 };
 
 export default Search;
-
