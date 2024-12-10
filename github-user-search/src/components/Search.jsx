@@ -12,10 +12,10 @@ const Search = () => {
   const [perPage] = useState(10);
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target.value;
-    if (name === 'username') setUsername(value);
-    if (name === 'location') setLocation(value);
-    if (name === 'minRepos') setMinRepos(value);
+    const value = e.target.value; // Directly accessing e.target.value
+    if (e.target.name === 'username') setUsername(value);
+    if (e.target.name === 'location') setLocation(value);
+    if (e.target.name === 'minRepos') setMinRepos(value);
   };
 
   const handleSubmit = async (e) => {
