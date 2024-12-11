@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { fetchUserData } from '../services/githubService'; // Renamed import
+import { fetchUserData } from '../services/githubService'; // Ensure the service name matches
 
 const Search = () => {
   const [username, setUsername] = useState('');
   const [location, setLocation] = useState('');
   const [minRepos, setMinRepos] = useState('');
-  const [userData, setUserData] = useState([]); // Corrected variable
+  const [userData, setUserData] = useState([]); // Fixed naming issue
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(null); // Handles error state
   const [page, setPage] = useState(1);
   const [perPage] = useState(10);
 
@@ -22,14 +22,17 @@ const Search = () => {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    setUserData([]);
+    setUserData([]); // Clear previous results
     setPage(1);
 
     try {
-      const data = await fetchUserData(username, location, minRepos, page, perPage); // Updated function
+      const data = await fetchUserData(username, location, minRepos, page, perPage);
       setUserData(data.items || []);
+      if (data.items.length === 0) {
+        setError("Looks like we can't find the user"); // Display error if no results
+      }
     } catch (err) {
-      setError("Looks like we can't find the user");
+      setError("Looks like we can't find the user"); // Error message
     } finally {
       setLoading(false);
     }
@@ -41,11 +44,11 @@ const Search = () => {
     const nextPage = page + 1;
 
     try {
-      const data = await fetchUserData(username, location, minRepos, nextPage, perPage); // Updated function
+      const data = await fetchUserData(username, location, minRepos, nextPage, perPage);
       setUserData((prevData) => [...prevData, ...(data.items || [])]);
       setPage(nextPage);
     } catch (err) {
-      setError("Looks like we can't find the user");
+      setError("Looks like we can't find the user"); // Error message
     } finally {
       setLoading(false);
     }
@@ -84,7 +87,7 @@ const Search = () => {
       </form>
 
       {loading && <p>Loading...</p>}
-      {error && <p className="text-red-500">{error}</p>}
+      {error && <p className="text-red-500">{error}</p>} {/* Display error message */}
       {userData.length > 0 && (
         <div className="mt-4">
           {userData.map((user) => (
@@ -106,4 +109,5 @@ const Search = () => {
 };
 
 export default Search;
+
 
