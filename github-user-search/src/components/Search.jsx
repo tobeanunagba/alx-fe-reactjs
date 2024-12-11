@@ -87,7 +87,7 @@ const Search = () => {
       </form>
 
       {loading && <p>Loading...</p>}
-      {error && <p className="text-red-500">{error}</p>} {/* Display error message */}
+      {error && <p className="text-red-500">Looks like we cant find the user...</p>} {/* Display error message */}
       {userData.length > 0 && (
         <div className="mt-4">
           {userData.map((user) => (
