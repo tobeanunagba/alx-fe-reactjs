@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
-import { fetchAdvancedGitHubUsers } from '../services/githubService';
+import { fetchUserData } from '../services/githubService'; // Renamed import
 
 const Search = () => {
   const [username, setUsername] = useState('');
   const [location, setLocation] = useState('');
   const [minRepos, setMinRepos] = useState('');
-  const [userData, setUserData] = useState([]); // Fixed the state name here
+  const [userData, setUserData] = useState([]); // Corrected variable
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [page, setPage] = useState(1);
   const [perPage] = useState(10);
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target.value; // Correctly destructuring from e.target
+    const { name, value } = e.target.value;
     if (name === 'username') setUsername(value);
     if (name === 'location') setLocation(value);
     if (name === 'minRepos') setMinRepos(value);
@@ -22,14 +22,14 @@ const Search = () => {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    setUserData([]); // Fixed the state name here
+    setUserData([]);
     setPage(1);
 
     try {
-      const data = await fetchAdvancedGitHubUsers(username, location, minRepos, page, perPage);
-      setUserData(data.items || []); // Fixed the state name here
+      const data = await fetchUserData(username, location, minRepos, page, perPage); // Updated function
+      setUserData(data.items || []);
     } catch (err) {
-      setError("Looks like we can't find the user"); // Set the error message
+      setError("Looks like we can't find the user");
     } finally {
       setLoading(false);
     }
@@ -41,11 +41,11 @@ const Search = () => {
     const nextPage = page + 1;
 
     try {
-      const data = await fetchAdvancedGitHubUsers(username, location, minRepos, nextPage, perPage);
-      setUserData((prevData) => [...prevData, ...(data.items || [])]); // Fixed the state name here
+      const data = await fetchUserData(username, location, minRepos, nextPage, perPage); // Updated function
+      setUserData((prevData) => [...prevData, ...(data.items || [])]);
       setPage(nextPage);
     } catch (err) {
-      setError("Looks like we can't find the user"); // Set the error message
+      setError("Looks like we can't find the user");
     } finally {
       setLoading(false);
     }
@@ -84,7 +84,7 @@ const Search = () => {
       </form>
 
       {loading && <p>Loading...</p>}
-      {error && <p className="text-red-500">{error}</p>} {/* Display the error message */}
+      {error && <p className="text-red-500">{error}</p>}
       {userData.length > 0 && (
         <div className="mt-4">
           {userData.map((user) => (
@@ -106,3 +106,4 @@ const Search = () => {
 };
 
 export default Search;
+
